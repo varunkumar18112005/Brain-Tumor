@@ -1,0 +1,164 @@
+{
+  "accuracy": 0.3125,
+  "sensitivity": 0.3125,
+  "recall": 0.3125,
+  "specificity": 0.75,
+  "precision": 0.0977,
+  "f1_score": 0.1488,
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      10
+    ],
+    [
+      0,
+      0,
+      0,
+      10
+    ],
+    [
+      0,
+      0,
+      0,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      10
+    ]
+  ],
+  "class_names": [
+    "Glioma",
+    "Meningioma",
+    "Pituitary",
+    "No Tumor"
+  ],
+  "ece": 0.6818,
+  "reliability_diagram": [
+    {
+      "bin_range": "0.0-0.1",
+      "confidence": 0.05,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.1-0.2",
+      "confidence": 0.15,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.2-0.3",
+      "confidence": 0.25,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.3-0.4",
+      "confidence": 0.35,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.4-0.5",
+      "confidence": 0.45,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.5-0.6",
+      "confidence": 0.55,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.6-0.7",
+      "confidence": 0.65,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.7-0.8",
+      "confidence": 0.75,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.8-0.9",
+      "confidence": 0.85,
+      "accuracy": 0.0,
+      "samples": 0
+    },
+    {
+      "bin_range": "0.9-1.0",
+      "confidence": 0.994,
+      "accuracy": 0.312,
+      "samples": 32
+    }
+  ],
+  "entropy_distribution": [
+    {
+      "range": "0.00-0.17",
+      "count": 32
+    },
+    {
+      "range": "0.17-0.33",
+      "count": 0
+    },
+    {
+      "range": "0.33-0.50",
+      "count": 0
+    },
+    {
+      "range": "0.50-0.67",
+      "count": 0
+    },
+    {
+      "range": "0.67-0.83",
+      "count": 0
+    },
+    {
+      "range": "0.83-1.00",
+      "count": 0
+    }
+  ],
+  "dice_coefficient": 0.6717,
+  "iou_score": 0.6569,
+  "training_history": {
+    "epochs": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "train_loss": [
+      0.7244,
+      0.1724,
+      0.0929,
+      0.0242
+    ],
+    "val_loss": [
+      1.4579,
+      2.3773,
+      4.5162,
+      4.2852
+    ],
+    "train_acc": [
+      0.8125,
+      1.0,
+      0.9922,
+      1.0
+    ],
+    "val_acc": [
+      0.3125,
+      0.3125,
+      0.3125,
+      0.3125
+    ]
+  },
+  "last_trained": "2026-11-21 06:40:25"
+}

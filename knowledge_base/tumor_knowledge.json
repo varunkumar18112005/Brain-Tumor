@@ -1,0 +1,166 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-11-21",
+  "description": "Structured medical tumor knowledge base for MRI and CT imaging patterns, radiomic feature associations, and decision support rules.",
+  "disclaimer": "This knowledge base is designed strictly for academic research and intelligent decision support. It does NOT constitute medical advice or definitive diagnostic findings.",
+  "tumor_categories": [
+    {
+      "id": "glioma",
+      "name": "Glioma",
+      "modality": "MRI",
+      "description": "Primary brain tumors originating from glial cells, typically exhibiting invasive and infiltrative growth patterns.",
+      "imaging_characteristics": {
+        "t1_intensity": "Hypointense to isointense relative to normal white matter",
+        "t2_flair_intensity": "Hyperintense with surrounding vasogenic edema",
+        "contrast_enhancement": "Variable, heterogeneous ring or patchy enhancement (high-grade glioblastoma) or minimal enhancement (low-grade)",
+        "peritumoral_edema": "Prominent, often extending along white matter tracts",
+        "mass_effect": "Moderate to severe midline shift and ventricular compression in higher grades"
+      },
+      "radiomic_feature_profiles": {
+        "mean_intensity": { "min": 90, "max": 210, "typical": 155 },
+        "std_intensity": { "min": 35, "max": 85, "typical": 58, "description": "High heterogeneity" },
+        "glcm_contrast": { "min": 18.0, "max": 75.0, "typical": 42.5 },
+        "glcm_homogeneity": { "min": 0.15, "max": 0.55, "typical": 0.32 },
+        "glcm_entropy": { "min": 4.5, "max": 7.5, "typical": 6.2 },
+        "boundary_irregularity": { "min": 0.55, "max": 0.95, "typical": 0.78, "description": "Infiltrative and jagged margins" },
+        "circularity": { "min": 0.15, "max": 0.60, "typical": 0.35 }
+      },
+      "rules": [
+        {
+          "rule_id": "GLI_01",
+          "condition": "boundary_irregularity > 0.65 AND std_intensity > 40",
+          "inference": "High structural heterogeneity and irregular infiltrative margin suggestive of glial neoplasm pattern.",
+          "confidence_weight": 0.85
+        },
+        {
+          "rule_id": "GLI_02",
+          "condition": "glcm_contrast > 30.0 AND glcm_homogeneity < 0.40",
+          "inference": "Elevated texture contrast with low local homogeneity matches infiltrative necrotic/solid tumor matrix.",
+          "confidence_weight": 0.80
+        }
+      ]
+    },
+    {
+      "id": "meningioma",
+      "name": "Meningioma",
+      "modality": "MRI",
+      "description": "Predominantly benign extra-axial intracranial tumors arising from the arachnoid cap cells of the meninges.",
+      "imaging_characteristics": {
+        "t1_intensity": "Isointense to hypointense relative to gray matter",
+        "t2_flair_intensity": "Isointense to hyperintense",
+        "contrast_enhancement": "Strong, intense, and homogeneous enhancement with frequent dural tail sign",
+        "peritumoral_edema": "Variable, disproportionate edema may occur",
+        "mass_effect": "Extra-axial mass effect with buckling of the adjacent cerebral cortex"
+      },
+      "radiomic_feature_profiles": {
+        "mean_intensity": { "min": 120, "max": 240, "typical": 185 },
+        "std_intensity": { "min": 15, "max": 45, "typical": 28, "description": "Relatively homogeneous internal texture" },
+        "glcm_contrast": { "min": 5.0, "max": 25.0, "typical": 14.0 },
+        "glcm_homogeneity": { "min": 0.45, "max": 0.85, "typical": 0.65 },
+        "glcm_entropy": { "min": 2.5, "max": 5.0, "typical": 3.8 },
+        "boundary_irregularity": { "min": 0.10, "max": 0.45, "typical": 0.25, "description": "Smooth, well-circumscribed contours" },
+        "circularity": { "min": 0.60, "max": 0.95, "typical": 0.78 }
+      },
+      "rules": [
+        {
+          "rule_id": "MEN_01",
+          "condition": "circularity > 0.60 AND boundary_irregularity < 0.45",
+          "inference": "Well-circumscribed, smooth globular contour characteristic of extra-axial meningeal neoplasms.",
+          "confidence_weight": 0.88
+        },
+        {
+          "rule_id": "MEN_02",
+          "condition": "glcm_homogeneity > 0.50 AND std_intensity < 40",
+          "inference": "Homogeneous internal tissue composition compatible with solid meningioma architecture.",
+          "confidence_weight": 0.82
+        }
+      ]
+    },
+    {
+      "id": "pituitary",
+      "name": "Pituitary Tumor",
+      "modality": "MRI",
+      "description": "Tumor arising within the sella turcica, commonly adenomas (microadenoma <10mm or macroadenoma >=10mm with suprasellar extension).",
+      "imaging_characteristics": {
+        "t1_intensity": "Isointense to normal pituitary gland; microadenomas show delayed enhancement",
+        "t2_flair_intensity": "Isointense to hyperintense",
+        "contrast_enhancement": "Moderate enhancement, distinct from bright contrast of normal anterior pituitary",
+        "peritumoral_edema": "Absent",
+        "mass_effect": "Chiasmatic compression in macroadenomas with suprasellar extension"
+      },
+      "radiomic_feature_profiles": {
+        "mean_intensity": { "min": 100, "max": 200, "typical": 145 },
+        "std_intensity": { "min": 15, "max": 42, "typical": 26 },
+        "glcm_contrast": { "min": 8.0, "max": 28.0, "typical": 16.5 },
+        "glcm_homogeneity": { "min": 0.40, "max": 0.75, "typical": 0.58 },
+        "glcm_entropy": { "min": 3.0, "max": 5.2, "typical": 4.1 },
+        "boundary_irregularity": { "min": 0.15, "max": 0.50, "typical": 0.32 },
+        "circularity": { "min": 0.55, "max": 0.90, "typical": 0.72 }
+      },
+      "rules": [
+        {
+          "rule_id": "PIT_01",
+          "condition": "area_pixels < 4000 AND boundary_irregularity < 0.50",
+          "inference": "Circumscribed, focal sellar/parasellar lesion geometry consistent with pituitary adenoma pattern.",
+          "confidence_weight": 0.84
+        }
+      ]
+    },
+    {
+      "id": "no_tumor",
+      "name": "No Tumor / Healthy Scan",
+      "modality": "MRI/CT",
+      "description": "Anatomically normal imaging presentation without focal space-occupying lesions or pathological contrast enhancement.",
+      "imaging_characteristics": {
+        "symmetry": "Bilateral cerebral symmetry preserved",
+        "ventricles": "Normal ventricular caliber without mass effect or midline shift",
+        "parenchyma": "Normal gray-white matter differentiation with expected attenuation/intensity profiles"
+      },
+      "radiomic_feature_profiles": {
+        "mean_intensity": { "min": 40, "max": 160, "typical": 95 },
+        "std_intensity": { "min": 10, "max": 35, "typical": 20 },
+        "glcm_contrast": { "min": 2.0, "max": 18.0, "typical": 8.5 },
+        "glcm_homogeneity": { "min": 0.55, "max": 0.90, "typical": 0.72 },
+        "glcm_entropy": { "min": 1.5, "max": 4.0, "typical": 2.9 },
+        "boundary_irregularity": { "min": 0.0, "max": 0.20, "typical": 0.05 },
+        "circularity": { "min": 0.0, "max": 1.0, "typical": 0.0 }
+      },
+      "rules": [
+        {
+          "rule_id": "NORM_01",
+          "condition": "tumor_area == 0 OR max_contour_area < 80",
+          "inference": "Absence of significant contiguous hyperintense or hypointense segmented lesion.",
+          "confidence_weight": 0.92
+        }
+      ]
+    },
+    {
+      "id": "ct_lesion",
+      "name": "CT Space-Occupying Lesion",
+      "modality": "CT",
+      "description": "Computed tomography findings demonstrating focal hypoattenuation, hyperattenuation, or rim enhancement.",
+      "imaging_characteristics": {
+        "attenuation": "Hypodense (edema, cyst, necrosis) or hyperdense (calcification, acute hemorrhage)",
+        "contrast_pattern": "Heterogeneous, nodular, or peripheral ring enhancement post-contrast",
+        "hounsfield_units": "Typical soft tissue range +20 to +50 HU, necrosis +10 to +25 HU, hemorrhage +60 to +90 HU"
+      },
+      "radiomic_feature_profiles": {
+        "mean_intensity": { "min": 70, "max": 220, "typical": 130 },
+        "std_intensity": { "min": 25, "max": 65, "typical": 45 },
+        "glcm_contrast": { "min": 12.0, "max": 50.0, "typical": 28.0 },
+        "glcm_homogeneity": { "min": 0.25, "max": 0.65, "typical": 0.44 },
+        "glcm_entropy": { "min": 3.8, "max": 6.8, "typical": 5.2 },
+        "boundary_irregularity": { "min": 0.30, "max": 0.85, "typical": 0.58 },
+        "circularity": { "min": 0.30, "max": 0.80, "typical": 0.52 }
+      },
+      "rules": [
+        {
+          "rule_id": "CT_01",
+          "condition": "mean_intensity > 110 AND boundary_irregularity > 0.50",
+          "inference": "Focal attenuation alteration with irregular border suggestive of acute/subacute space-occupying process.",
+          "confidence_weight": 0.82
+        }
+      ]
+    }
+  ]
+}

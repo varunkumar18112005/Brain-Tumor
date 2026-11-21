@@ -1,0 +1,137 @@
+{
+  "system_name": "Medical Imaging Uncertainty Assessment Fuzzy System",
+  "version": "1.0.0",
+  "membership_functions": {
+    "prediction_confidence": {
+      "type": "trapezoidal_triangular",
+      "range": [0.0, 1.0],
+      "sets": {
+        "low": [0.0, 0.0, 0.45, 0.60],
+        "moderate": [0.45, 0.65, 0.82],
+        "high": [0.72, 0.88, 1.0, 1.0]
+      }
+    },
+    "segmentation_quality": {
+      "type": "trapezoidal_triangular",
+      "range": [0.0, 1.0],
+      "sets": {
+        "poor": [0.0, 0.0, 0.35, 0.50],
+        "fair": [0.35, 0.60, 0.80],
+        "good": [0.65, 0.85, 1.0, 1.0]
+      }
+    },
+    "boundary_clarity": {
+      "type": "trapezoidal_triangular",
+      "range": [0.0, 1.0],
+      "sets": {
+        "diffuse": [0.0, 0.0, 0.35, 0.50],
+        "intermediate": [0.35, 0.58, 0.78],
+        "sharp": [0.65, 0.85, 1.0, 1.0]
+      }
+    },
+    "feature_consistency": {
+      "type": "trapezoidal_triangular",
+      "range": [0.0, 1.0],
+      "sets": {
+        "inconsistent": [0.0, 0.0, 0.40, 0.55],
+        "moderate": [0.40, 0.65, 0.80],
+        "consistent": [0.70, 0.88, 1.0, 1.0]
+      }
+    },
+    "uncertainty_level": {
+      "type": "triangular_trapezoidal",
+      "range": [0.0, 1.0],
+      "sets": {
+        "low": [0.0, 0.0, 0.25, 0.40],
+        "moderate": [0.25, 0.50, 0.75],
+        "high": [0.60, 0.80, 1.0, 1.0]
+      }
+    }
+  },
+  "rules": [
+    {
+      "id": "R1",
+      "if": {
+        "prediction_confidence": "high",
+        "segmentation_quality": "good",
+        "feature_consistency": "consistent"
+      },
+      "then": {
+        "uncertainty_level": "low"
+      },
+      "explanation": "High deep-learning probability confirmed by solid segmentation quality and coherent radiomic features indicates reliable classification with minimal uncertainty."
+    },
+    {
+      "id": "R2",
+      "if": {
+        "prediction_confidence": "high",
+        "boundary_clarity": "diffuse",
+        "feature_consistency": "moderate"
+      },
+      "then": {
+        "uncertainty_level": "moderate"
+      },
+      "explanation": "High network confidence tempered by infiltrative or poorly demarcated boundary contours; slight uncertainty in precise tumor boundary extent."
+    },
+    {
+      "id": "R3",
+      "if": {
+        "prediction_confidence": "moderate",
+        "segmentation_quality": "fair"
+      },
+      "then": {
+        "uncertainty_level": "moderate"
+      },
+      "explanation": "Moderate model confidence with intermediate segmentation coherence suggests clinical correlation is advised."
+    },
+    {
+      "id": "R4",
+      "if": {
+        "prediction_confidence": "low"
+      },
+      "then": {
+        "uncertainty_level": "high"
+      },
+      "explanation": "CNN classifier output falls below the reliability threshold; prediction is ambiguous and flagged as high uncertainty."
+    },
+    {
+      "id": "R5",
+      "if": {
+        "segmentation_quality": "poor",
+        "feature_consistency": "inconsistent"
+      },
+      "then": {
+        "uncertainty_level": "high"
+      },
+      "explanation": "Extracted radiomic descriptors contradict standard pathological profiles and segmentation quality is compromised; urgent expert review mandatory."
+    },
+    {
+      "id": "R6",
+      "if": {
+        "prediction_confidence": "moderate",
+        "boundary_clarity": "sharp",
+        "feature_consistency": "consistent"
+      },
+      "then": {
+        "uncertainty_level": "low"
+      },
+      "explanation": "Well-circumscribed margins and strong knowledge base concordance elevate overall diagnostic certainty despite moderate softmax margin."
+    },
+    {
+      "id": "R7",
+      "if": {
+        "boundary_clarity": "diffuse",
+        "segmentation_quality": "poor"
+      },
+      "then": {
+        "uncertainty_level": "high"
+      },
+      "explanation": "Vague lesion boundaries preventing stable automated segmentation yield high epistemic and fuzzy uncertainty."
+    }
+  ],
+  "decision_thresholds": {
+    "abstention_threshold": 0.55,
+    "expert_review_threshold": 0.45,
+    "monte_carlo_samples": 15
+  }
+}

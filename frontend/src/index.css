@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f5f9;
+  color: #000000;
+}
+
+/* Force solid black headings across all light backgrounds */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+  font-weight: 900;
+}
+
+/* Muted classes boosted to high-contrast dark navy/black for crystal-clear readability */
+.text-slate-400,
+.text-slate-500,
+.text-slate-600,
+.text-gray-400,
+.text-gray-500,
+.text-gray-600 {
+  color: #0f172a !important;
+  font-weight: 600;
+}
+
+.text-slate-700,
+.text-slate-800,
+.text-slate-900,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900 {
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+/* Preserve crisp white text specifically inside dark containers */
+.bg-slate-950,
+.bg-slate-950 h1,
+.bg-slate-950 h2,
+.bg-slate-950 h3,
+.bg-slate-950 p,
+.bg-slate-950 span,
+.bg-slate-900,
+.bg-slate-900 h1,
+.bg-slate-900 h2,
+.bg-slate-900 h3,
+.bg-slate-900 p,
+.bg-slate-900 span,
+aside,
+aside span,
+aside p,
+aside div,
+.text-white,
+.text-white * {
+  color: #ffffff !important;
+}
+
+/* Exception for status tags/badges inside dark containers */
+aside .bg-emerald-400,
+aside .bg-slate-900,
+.bg-slate-900 button,
+.bg-slate-900 button span {
+  color: #ffffff !important;
+}
+
+/* Fallback definitions for legacy medical theme classes */
+.bg-medical-800 {
+  background-color: #1d4ed8 !important; /* solid blue-700 */
+  color: #ffffff !important;
+}
+.bg-medical-900 {
+  background-color: #1e40af !important; /* solid blue-800 */
+  color: #ffffff !important;
+}
+.bg-medical-100 {
+  background-color: #dbeafe !important; /* solid blue-100 */
+  color: #000000 !important;
+}
+.text-medical-800 {
+  color: #1d4ed8 !important;
+}
+.text-medical-900,
+.text-medical-950 {
+  color: #000000 !important;
+}
+.border-medical-300,
+.border-medical-400 {
+  border-color: #93c5fd !important;
+}
+.border-medical-800 {
+  border-color: #1d4ed8 !important;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
